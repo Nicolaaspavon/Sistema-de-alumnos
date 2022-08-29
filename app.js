@@ -28,6 +28,12 @@ boton_carga.addEventListener("click", function () {
     nota_3.value
   );
   newFunction();
+  swal({
+    title: "Carga exitosa",
+    text: "Se ha creado un nuevo alumno",
+    icon: "success",
+    button: "Ok",
+  });
 });
 
 function newFunction() {
@@ -65,6 +71,21 @@ function borrar_elemento(e) /*e es el objeto evento*/ {
   let hijo = e.target; //target me avisa a donde ocurre el evento
   let padre = hijo.parentNode; //Busque el nodo padre para poder eliminarlo
   padre.remove();
+  swal({
+    title: "Esta seguro que desea eliminar el participante?",
+    text: "una vez eliminado no podras recuperar los datos!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      swal("El alumno se elimino correctamente", {
+        icon: "success",
+      });
+    } else {
+      swal("Su alumno no se elimino");
+    }
+  });
 }
 
 function Guardar_transaccion() {
