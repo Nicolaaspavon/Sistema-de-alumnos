@@ -111,16 +111,3 @@ function Guardar_transaccion() {
   //guardar en el nuevo arreglo, mi arreglo de alumnos
   arreglo_Transaccion.push(arreglo_JSON);
 }
-
-boton_imprimir.addEventListener("clic", function () {
-  let { nombreAlu, apellidoAlu, nota1Alu, nota2Alu, Nota3alu } = Alumno;
-
-  console.log("El nombre del alumno es:" + nombreAlu);
-  console.log("El apellido del alumno es:" + apellidoAlu);
-  console.log(
-    "Las notas del alumno son:" + nota1Alu + " " + nota2Alu + " " + Nota3alu
-  );
-  promedio = parseInt(nota1Alu + nota2Alu + Nota3alu / 3);
-  promedios.push(promedio);
-  console.log(promedios);
-});
