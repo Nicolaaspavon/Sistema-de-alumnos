@@ -5,13 +5,15 @@ function crearObjetoAlumno(
   apellidoAlu,
   Nota1Alu,
   Nota2Alu,
-  Nota3Alu
+  Nota3Alu,
+  PromedioAlu
 ) {
   (this.nombreAlu = nombreAlu),
     (this.apellidoAlu = apellidoAlu),
     (this.Nota1Alu = Nota1Alu),
     (this.Nota2Alu = Nota2Alu),
-    (this.Nota3Alu = Nota3Alu);
+    (this.Nota3Alu = Nota3Alu),
+    (this.promedioAlu = PromedioAlu);
 }
 
 boton_carga.addEventListener("click", function () {
@@ -20,13 +22,47 @@ boton_carga.addEventListener("click", function () {
   let nota_1 = document.getElementById("nota_1");
   let nota_2 = document.getElementById("nota_2");
   let nota_3 = document.getElementById("nota_3");
+  let promedio =
+    (parseInt(nota_1.value) + parseInt(nota_2.value) + parseInt(nota_3.value)) /
+    3;
   Alumno = new crearObjetoAlumno(
     nombre.value,
     apellido.value,
     nota_1.value,
     nota_2.value,
-    nota_3.value
+    nota_3.value,
+    promedio
   );
+  let padre = document.getElementById("impresion");
+  let lista = document.createElement("li");
+  const image = document.createElement("img");
+  image.src = "./Img/usuario.png";
+  padre.appendChild(image);
+  lista.innerHTML =
+    "Alumno: " +
+    Alumno.nombreAlu +
+    " " +
+    Alumno.apellidoAlu +
+    " <br> " +
+    "Notas: " +
+    Alumno.Nota1Alu +
+    " " +
+    Alumno.Nota2Alu +
+    " " +
+    Alumno.Nota3Alu +
+    " " +
+    "<br>" +
+    "El promedio del alumno es: " +
+    Alumno.promedioAlu +
+    `<button type="button"  class="btn btn-secondary borrar" >Borrar</button>`;
+  padre.append(lista);
+
+  //capturar los botones borrar
+  let botones_borrar = document.querySelectorAll(".borrar");
+
+  for (let boton of botones_borrar) {
+    boton.addEventListener("click", borrar_elemento);
+  }
   newFunction();
   swal({
     title: "Carga exitosa",
@@ -42,35 +78,11 @@ function newFunction() {
   Guardar_transaccion(lista_alumnos);
 }
 
-boton_mostrar.addEventListener("click", function () {
-  let padre = document.getElementById("impresion");
-  let lista = document.createElement("li");
-  lista.innerHTML =
-    Alumno.nombreAlu +
-    " " +
-    Alumno.apellidoAlu +
-    " " +
-    Alumno.Nota1Alu +
-    " " +
-    Alumno.Nota2Alu +
-    " " +
-    Alumno.Nota3Alu +
-    " " +
-    `<button class="borrar">Borrar alumno</button>`;
-  padre.append(lista);
-
-  //capturar los botones borrar
-  let botones_borrar = document.querySelectorAll(".borrar");
-
-  for (let boton of botones_borrar) {
-    boton.addEventListener("click", borrar_elemento);
-  }
-});
-
 function borrar_elemento(e) /*e es el objeto evento*/ {
   let hijo = e.target; //target me avisa a donde ocurre el evento
-  let padre = hijo.parentNode; //Busque el nodo padre para poder eliminarlo
-  padre.remove();
+  let padre = hijo.parentNode;
+
+  //Busque el nodo padre para poder eliminarlo
   swal({
     title: "Esta seguro que desea eliminar el participante?",
     text: "una vez eliminado no podras recuperar los datos!",
@@ -79,6 +91,7 @@ function borrar_elemento(e) /*e es el objeto evento*/ {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
+      padre.remove();
       swal("El alumno se elimino correctamente", {
         icon: "success",
       });
@@ -99,18 +112,15 @@ function Guardar_transaccion() {
   arreglo_Transaccion.push(arreglo_JSON);
 }
 
-//Ingreso de la appi
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "5844bac791mshb90ca9654268ddbp1c8021jsn4ac1d568b0f2",
-    "X-RapidAPI-Host": "countries-cities.p.rapidapi.com",
-  },
-};
+boton_imprimir.addEventListener("clic", function () {
+  let { nombreAlu, apellidoAlu, nota1Alu, nota2Alu, Nota3alu } = Alumno;
 
-fetch(
-  "https://countries-cities.p.rapidapi.com/location/country/list?format=json",
-  options
-)
-  .then((response) => response.json())
-  .then((response) => console.log(response));
+  console.log("El nombre del alumno es:" + nombreAlu);
+  console.log("El apellido del alumno es:" + apellidoAlu);
+  console.log(
+    "Las notas del alumno son:" + nota1Alu + " " + nota2Alu + " " + Nota3alu
+  );
+  promedio = parseInt(nota1Alu + nota2Alu + Nota3alu / 3);
+  promedios.push(promedio);
+  console.log(promedios);
+});

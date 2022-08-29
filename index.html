@@ -4,14 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
     <title>Inicio</title>
   </head>
   <body>
     <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      body {
+        background-color: black;
+        color: white;
+      }
       main {
         width: 500px;
-        margin-left: 450px;
+        margin-left: 290px;
         margin-top: 100px;
+      }
+      h1 {
+        margin-left: 50px;
+        margin-bottom: 20px;
       }
       input {
         width: 100%;
@@ -24,10 +47,31 @@
         margin-top: 15px;
         margin-left: 200px;
       }
-    </style>
-    <main>
-      <p>Ingrese alumno con sus notas</p>
+      .cont {
+        background-color: #e073a9;
+        color: white;
+        font-size: 20px;
+        border: 1px white solid;
+      }
 
+      li {
+        list-style: none;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+      }
+      #impresion {
+        border: 1px, black, solid;
+      }
+      button {
+        margin-bottom: 20px;
+      }
+    </style>
+
+    <main>
+      <h1>Ingrese alumno con sus notas</h1>
       <label for="nombre">NOMBRE</label>
       <input type="text" name="" id="nombre" />
       <label for="apellido">APELLIDO</label>
@@ -38,10 +82,12 @@
       <input type="text" name="" id="nota_2" />
       <label for="nota_3">NOTA 3</label>
       <input type="text" name="" id="nota_3" />
-      <button id="boton_carga">ingresar</button>
-      <button id="boton_mostrar">mostrar usuario</button>
-
-      <div id="impresion"></div>
+      <button class="btn btn-primary" id="boton_carga" type="button">
+        ingresar
+      </button>
+      <div class="cont">
+        <div id="impresion"></div>
+      </div>
     </main>
     <script src="./app.js"></script>
     <!-- Api de alertas -->
